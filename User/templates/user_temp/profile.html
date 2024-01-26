@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--  -->
+<div class="m-auto border rounded p-4" style="max-width: 1280px;">
+    <h2 class="text-center text-2xl font-bold pb-4">Profile</h2>
+    <hr class="my-3">
+    <div class="p-2 mb-4 border">
+        <p>Name : <span class="text-xl font-bold">{{user.first_name}} {{user.last_name}}</span></p>
+        <p>Email : {{user.email}}</p>
+        <p>Balance : <span class="text-lg font-bold">{{user.depositAccount.balance}}$</span></p>
+        <hr class="mb-4 mt-2">
+        <a href="{% url 'updateprofile' %}" class="bg-blue-500 rounded border text-white p-2 px-4 inline-block">Update
+            Profile</a>
+        <a href="{% url 'updatepassword' %}" class="bg-blue-500 rounded border text-white p-2 px-4 inline-block">Update
+            Password</a>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="border p-2">
+        <p class="text-center text-2xl">Adaption History</p>
+        {% if adaptedPets %}
+        <table class="w-full">
+            <thead>
+                <tr>
+                    <td class="p-2">Tr ID</td>
+                    <td class="p-2">Book Name</td>
+                    <td class="p-2">Borrow Price</td>
+                    <td class="p-2">Date Borrowed</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pet in adaptedPets %}
+                <tr>
+                    <td class="p-2" style="border-top: 1px solid #6666663d;">{{pet.id}}</td>
+                    <td class="p-2" style="border-top: 1px solid #6666663d;">{{pet.pet.title}}</td>
+                    <td class="p-2" style="border-top: 1px solid #6666663d;">{{pet.pet.adapt_price}}</td>
+                    <td class="p-2" style="border-top: 1px solid #6666663d;">{{pet.timestamp}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No history / data Yet ! Thanks</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

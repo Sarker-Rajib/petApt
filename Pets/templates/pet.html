@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- {% load static %} -->
+<!--  -->
+{% block css %}
+<style>
+    textarea {
+        width: 100%;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    label {
+        color: #fff;
+    }
+
+    input {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="pet-card pt-2">
+    <div class="md:grid grid-cols-3 gap-6">
+        <div>
+            <img src={{pet.image.url}} alt="pet" class="w-full">
+        </div>
+
+        <div class="col-span-2">
+            <p class="text-xl pb-2">Title: {{pet.title}}</p>
+            <p>Details: {{pet.description}}</p>
+            <p class="text-2xl pb-2">Borrowing Price: {{pet.borrowing_price}}$</p>
+            <p class="text-xl pb-2">Category: {{pet.category}}</p>
+            <hr class="my-2">
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'adaptpet' pet.id %}"
+                class="rounded text-white hover:bg-green-500 border bg-green-400 px-6 py-2 inline-block">
+                Adapt pet
+            </a>
+            {% else %}
+            <button class="rounded text-white bg-blue-400 px-6 py-2 inline-block">Adapt
+                pet
+            </button>
+            <p style="font-size: 12px;">Please Login to Adapt</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="rounded bg-green-400 p-2 mt-4">
+        <div class="rounded p-2 bg-white">
+            <p>Give a Review</p>
+            {% for review in reviews %}
+            <div class="border p-2 mb-2">
+                <h3 class="text-xl">{{review.name}}</h3>
+                <p class="text-yellow-500">{{review.created_on}}</p>
+                <hr>
+                <p>{{review.body}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-2 p-2 border">
+            <form method="POST">
+                {% csrf_token %}
+                {{review_form}}
+                <br>
+                <button type="submit"
+                    class="rounded text-white bg-black border hover:bg-green-400 px-6 py-2 inline-block">
+                    Submit
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

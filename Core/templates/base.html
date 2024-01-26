@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static '17.jpg' %}" type="image/x-icon">
+    <title>
+        {% block head_title %} PetApt {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.1/dist/tailwind.min.css">
+    <style>
+        input,
+        label {
+            width: 100% !important;
+        }
+
+        .helptext {
+            display: inline-block;
+            width: 100% !important;
+        }
+    </style>
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="m-auto px-2" style="max-width: 1280px; min-height: calc(100vh - 155px);">
+        {% include 'messages.html' %}
+        {% block content %}
+        <!--  -->
+        {% endblock %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>
