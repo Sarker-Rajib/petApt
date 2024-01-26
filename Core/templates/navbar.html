@@ -1,5 +1,5 @@
-<div class="m-auto bg-blue-500 mb-4">
-    <nav class="flex items-center justify-between flex-wrap py-4 px-2 m-auto" style="max-width: 1280px;">
+<div class="m-auto bg-yellow-400 mb-4">
+    <nav class="flex items-center py-4 px-2 m-auto" style="max-width: 1280px;justify-content: space-between;">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
             <span class="font-semibold text-xl tracking-tight text-white"><a href="/">
                     PetApt
@@ -15,12 +15,18 @@
             </button>
         </div>
 
-        <div class="w-full block flex-grow hidden lg:flex lg:items-center lg:w-auto pl-10 pr-2" id="collNav">
+        <div class="w-full block hidden lg:flex lg:items-center lg:w-auto pl-10 pr-2" id="collNav">
+            <a href="{% url 'home' %}"
+                class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded text-white border-white hover:border-transparent hover:text-dark hover:bg-red-700 mt-4 lg:mt-0">Home
+            </a>
             {% if request.user.is_authenticated %}
-            <div class="text-md lg:flex-grow"></div>
             <div class="flex w-auto">
                 <a href="{% url 'deposit' %}"
                     class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded text-white border-white hover:border-transparent hover:text-dark hover:bg-red-700 mt-4 lg:mt-0">Deposit
+                </a>
+
+                <a href="{% url 'add_pet' %}"
+                    class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded text-white border-white hover:border-transparent hover:text-dark hover:bg-red-700 mt-4 lg:mt-0">Add
                 </a>
 
                 <a href="{% url 'profile' %}"
@@ -31,7 +37,6 @@
                     class="mx-2 inline-block font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded text-white border-white hover:border-transparent hover:text-dark hover:bg-red-700 mt-4 lg:mt-0">Logout</a>
             </div>
             {% else %}
-            <div class="text-md lg:flex-grow"></div>
             <div>
                 <a href="{% url 'login' %}"
                     class="mr-2 inline-block font-medium text-sm px-4 py-2 leading-none bg-blue-900 rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-red-700 mt-4 lg:mt-0">Login</a>
