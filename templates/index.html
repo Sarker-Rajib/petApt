@@ -8,20 +8,26 @@
     <ul class="flex flex-wrap">
         <li><a href="{% url 'home' %}" class="bg-green-400 block p-2 px-4 ml-0 text-white rounded m-2">All</a></li>
         {% for item in category %}
-        <li><a href="{% url 'filterpet' item.slug %}"
-                class="bg-green-400 block p-2 px-4 text-white rounded m-2">{{item}}</a></li>
+        <li>
+            <a href="{% url 'filterpet' item.slug %}" class="bg-green-400 block p-2 px-4 text-white rounded m-2">
+                {{item}}
+            </a>
+        </li>
         {% endfor %}
     </ul>
 </div>
+
 <hr class="my-2">
 <div class="pt-2 grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 xl:grid-cols-4 gap-4">
     {% for pet in pets %}
     <div class="pet-card border">
-        <img src={{pet.image.url}} alt="pet" class="w-full">
+        <div class="p-2">
+            <img src={{pet.image.url}} alt="pet" class="w-full">
+        </div>
         <div class="p-4">
             <p>Name: {{pet.title}}</p>
             <p>Details: {{pet.description | truncatewords:10}}</p>
-            <p>Borrowing Price: {{pet.adapt_price}}$</p>
+            <p>Adapting Price: {{pet.adapt_price}}$</p>
             <p>Category: {{pet.category}}</p>
             <hr class="my-2">
             <a href="{% url 'petDetails' pet.id %}"

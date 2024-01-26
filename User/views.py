@@ -3,13 +3,18 @@ from django.views.generic import FormView
 from .forms import CreateUserForm, DepositMoney, UpdateUser
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.contrib import messages
 from Pets.models import Pet
 from .models import AdaptPet
 from datetime import datetime
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -20,12 +25,40 @@ class CreateUserView(FormView):
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+                    
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        
+
+        confirm_link = f'http://127.0.0.1:8000/user/active/{uid}/{token}'
+        email_subject = 'Please Confirm Your Email'
+        email_body = render_to_string('user_temp/confirm-email.html', {'confirm_link': confirm_link})
+        
+        email = EmailMultiAlternatives(email_subject, '', to=[user.email])
+        email.attach_alternative(email_body, 'text/html')
+        email.send()
+        messages.success('Please Check Your Email')
         return super().form_valid(form)
 
     def form_invalid(self, form):
         print("Form is invalid.")
         return super().form_invalid(form)
+
+def activate(request, uid64, token):
+    try:
+        uid = urlsafe_base64_decode(uid64).decode()
+        user = User._default_manager.get(pk=uid)
+
+    except(User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active=True
+        user.save()
+        return redirect('login')
+    
+    else:
+        return redirect('register')
 
 class UserLoginView(LoginView):
     template_name = 'user_temp/login-form.html'

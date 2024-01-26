@@ -1,10 +1,10 @@
+{% load static %}
 <div class="m-auto bg-yellow-400 mb-4">
-    <nav class="flex items-center py-4 px-2 m-auto" style="max-width: 1280px;justify-content: space-between;">
+    <nav class="flex items-center p-2 m-auto" style="max-width: 1280px; justify-content: space-between;">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
-            <span class="font-semibold text-xl tracking-tight text-white"><a href="/">
-                    PetApt
-                </a>
-            </span>
+            <a href="{% url 'home' %}">
+                <img width="60" src="{% static 'logo.png' %}" alt="logo">
+            </a>
         </div>
         <div class="block lg:hidden">
             <button id="triggerBtn"

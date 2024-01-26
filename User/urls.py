@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/', views.profileView, name='profile' ),
     path('update-profile/', views.update_profile, name='updateprofile' ),
     path('update-pass/', views.update_password, name='updatepassword' ),
+    path('active/<uid64>/<token>/', views.activate, name='activate')
 ]
