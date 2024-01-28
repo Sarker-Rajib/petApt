@@ -9,6 +9,7 @@ SECRET_KEY = env("SECRET__KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*", 'https://petapt.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://petapt.onrender.com', 'https://*.127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
