@@ -25,7 +25,9 @@ class CreateUserView(FormView):
 
     def form_valid(self, form):
         user = form.save()
-                    
+        user.is_active = False
+        user.save()
+        
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         
