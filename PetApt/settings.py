@@ -1,19 +1,16 @@
 from pathlib import Path
+import dj_database_url
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jdm+a8!g5up7@v!dmd8%__xj-ai8l9^n_@jtb_=qm$$=_u3yan'
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = env("SECRET__KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*", 'https://petapt.onrender.com']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,20 +55,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PetApt.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgres://petadapt_user:QRDmYVx2MEY8vU0dZNjoWZzdNgraPPG6@dpg-cmr7c4md3nmc73ef7hh0-a.oregon-postgres.render.com/petadapt'
+    )
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -90,23 +78,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-import environ
-env = environ.Env()
-environ.Env.read_env()
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/'static',

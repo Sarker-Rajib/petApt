@@ -23,11 +23,11 @@ class CreateUserView(FormView):
     template_name = 'user_temp/register-form.html'
     success_url = reverse_lazy('home')
 
-    def form_valid(self, form):
+    def form_valid(self, form, request):
         user = form.save()
         user.is_active = False
         user.save()
-        
+
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         
@@ -39,7 +39,7 @@ class CreateUserView(FormView):
         email = EmailMultiAlternatives(email_subject, '', to=[user.email])
         email.attach_alternative(email_body, 'text/html')
         email.send()
-        messages.success('Please Check Your Email')
+        messages.success(request, 'Please Check Your Email')
         return super().form_valid(form)
 
     def form_invalid(self, form):
