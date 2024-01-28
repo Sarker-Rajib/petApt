@@ -96,7 +96,7 @@ def update_profile(request):
         updateForm = UpdateUser(request.POST, instance = request.user)
         if updateForm.is_valid():
             updateForm.save()
-            messages.success(request, 'User Created Successfully')
+            messages.success(request, 'Data Updated Successfully')
             return redirect('profile')
     else:
         updateForm = UpdateUser(instance = request.user)
@@ -108,7 +108,7 @@ def update_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, 'Updated Successfully')
+            messages.success(request, 'Password Updated Successfully')
             return redirect('profile')
     else:
         form = PasswordChangeForm(user = request.user)
