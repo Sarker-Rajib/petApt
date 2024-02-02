@@ -17,7 +17,6 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
 # Create your views here.
-
 class CreateUserView(FormView):
     form_class = CreateUserForm
     template_name = 'user_temp/register-form.html'
@@ -60,7 +59,7 @@ def activate(request, uid64, token):
         return redirect('login')
     
     else:
-        return redirect('register')
+        return redirect('signup')
 
 class UserLoginView(LoginView):
     template_name = 'user_temp/login-form.html'
