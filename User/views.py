@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from .forms import CreateUserForm, DepositMoney, UpdateUser
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import User
 from django.contrib import messages
 from Pets.models import Pet
 from .models import AdaptPet
 from datetime import datetime
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
@@ -67,9 +67,9 @@ class UserLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('home')
     
-class UserLogOUt(LogoutView):
-    def get_success_url(self):
-        return reverse_lazy('home')
+def user_logout(request):
+    logout(request)
+    return redirect(reverse_lazy('home'))
     
 class DepositMoneyView(FormView):
     form_class = DepositMoney
