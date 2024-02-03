@@ -57,10 +57,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'PetApt.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://petadapt_user:QRDmYVx2MEY8vU0dZNjoWZzdNgraPPG6@dpg-cmr7c4md3nmc73ef7hh0-a.oregon-postgres.render.com/petadapt'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgres://petadapt_user:QRDmYVx2MEY8vU0dZNjoWZzdNgraPPG6@dpg-cmr7c4md3nmc73ef7hh0-a.oregon-postgres.render.com/petadapt'
+#     )
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
