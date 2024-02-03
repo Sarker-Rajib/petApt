@@ -48,6 +48,8 @@
         </div>
     </div>
 
+    {% if user.is_authenticated %}
+
     <div class="rounded bg-green-400 p-2 mt-4">
         <div class="rounded p-2 bg-white">
             <p>Give a Review</p>
@@ -74,6 +76,8 @@
         </div>
 
     </div>
+
+    {% endif %}
 
 </div>
 {% endblock %}

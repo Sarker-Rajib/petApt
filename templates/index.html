@@ -25,10 +25,10 @@
             <img src={{pet.image.url}} alt="pet" class="w-full">
         </div>
         <div class="p-4">
-            <p>Name: {{pet.title}}</p>
+            <p>Name: <span class="text-lg font-bold text-purple-500">{{pet.title}}</span></p>
             <p>Details: {{pet.description | truncatewords:8}}</p>
             <p>Adapting Price: {{pet.adapt_price}}$</p>
-            <p>Category: {{pet.category}}</p>
+            <p>Category: <span class="rounded border inline-block px-1 border-blue-400">{{pet.category}}</span> </p>
             <hr class="my-2">
             <a href="{% url 'petDetails' pet.id %}"
                 class="rounded w-full text-center text-white hover:bg-green-500 border bg-green-400 px-6 py-2 inline-block">
