@@ -35,7 +35,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'PetApt.urls'
-MEDIA_URL = '/media/'
+MEDIA_URL = ''
 MEDIA_ROOT = BASE_DIR / ''
 
 TEMPLATES = [
