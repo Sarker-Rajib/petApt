@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-
+from django.utils import timezone
 # Create your models here.
 
 class PetCategory(models.Model):
@@ -24,7 +24,7 @@ class Review(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='feedbacks')
     name = models.CharField(max_length=20, blank=True)
     body = models.TextField(verbose_name='Your Feedback')
-    created_on = models.DateTimeField(default=datetime.now())
+    created_on = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Feedback by {self.name}"
