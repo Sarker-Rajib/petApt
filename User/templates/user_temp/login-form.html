@@ -2,7 +2,7 @@
 {% block css %}
 <style>
     input {
-        border: 2px solid #8c19ce;
+        border: 2px solid #16b1b16c;
         border-radius: 5px;
         padding: 5px 10px;
     }
@@ -11,7 +11,7 @@
 
 {% block content %}
 <!--  -->
-<div class="m-auto border rounded p-4" style="max-width: 450px;">
+<div class="m-auto border bg-white shadow rounded p-4" style="max-width: 450px;">
     <h2 class="text-center text-2xl pb-4">Please Login</h2>
     <form method="POST">
         {% csrf_token %}

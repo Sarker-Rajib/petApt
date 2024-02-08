@@ -21,17 +21,18 @@
 {% endblock %}
 
 {% block content %}
-<div class="pet-card pt-2">
+<div class="pet-card pt-2 m-auto bg-white rounded p-4" style="max-width: 700px;">
     <div class="md:grid grid-cols-3 gap-6">
         <div>
             <img src={{pet.image.url}} alt="pet" class="w-full">
         </div>
 
         <div class="col-span-2">
-            <p class="text-xl pb-2">Title: {{pet.title}}</p>
-            <p>Details: {{pet.description}}</p>
-            <p class="text-2xl pb-2">Adapting Price: {{pet.adapt_price}}$</p>
-            <p class="text-xl pb-2">Category: {{pet.category}}</p>
+            <p class="text-xl py-2">Title: {{pet.title}}</p>
+            <p><span class="text-sky-600">Details:</span> {{pet.description}}</p>
+            <hr class="my-2">
+            <p class="text-xl pb-2">Adapting Price: {{pet.adapt_price}}$</p>
+            <p class="text-lg pb-2">Category: {{pet.category}}</p>
             <hr class="my-2">
 
             {% if user.is_authenticated %}
@@ -50,7 +51,7 @@
 
     {% if user.is_authenticated %}
 
-    <div class="rounded bg-green-400 p-2 mt-4">
+    <div class="rounded bg-black p-2 mt-4">
         <div class="rounded p-2 bg-white">
             <p>Give a Review</p>
             {% for review in reviews %}
@@ -63,7 +64,7 @@
             {% endfor %}
         </div>
 
-        <div class="mt-2 p-2 border">
+        <div class="mt-2 p-2 border rounded">
             <form method="POST">
                 {% csrf_token %}
                 {{review_form}}
